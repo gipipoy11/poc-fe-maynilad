@@ -27,7 +27,7 @@ export const VehicleProvider = ({ children }: PropsWithChildren<object>) => {
 
             try {
                 const response = await axios.get(url);
-                setVehicles(response.data);
+                setVehicles(response.data.data);
             } catch (err) {
                 setError(err as Error);
             } finally {

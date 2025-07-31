@@ -16,6 +16,8 @@ interface Vehicle {
     };
 }
 
+
+
 interface PageProps {
     params: { id: string };
 }
@@ -30,7 +32,7 @@ const VehiclePage = async ({ params }: PageProps) => {
         <div className='flex flex-col items-left max-w-2xl mx-auto p-4'>
             <h1 className="text-3xl font-bold mb-4">{vehicle.Title}</h1>
             <Image
-                src={vehicle.Image.url}
+                src={ `${process.env.NEXT_PUBLIC_IMAGE_URL}${vehicle.Image.url}` }
                 alt={vehicle.Image.alternativeText ? vehicle.Image.alternativeText: vehicle.Title}
                 width={vehicle.Image.width}
                 height={vehicle.Image.height}
