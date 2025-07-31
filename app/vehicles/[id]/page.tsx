@@ -1,6 +1,6 @@
 // app/vehicles/[id]/page.js
 import Image from 'next/image';
-import { vehicles } from '../../../data/vehicles';
+import { vehicles } from '../../../data/r_vehicles';
 
 const VehiclePage = ({ params } : { params: any }) => {
     const vehicle = vehicles.find(v => v.id === parseInt(params.id));
@@ -14,7 +14,7 @@ const VehiclePage = ({ params } : { params: any }) => {
             <h1 className="text-3xl font-bold mb-4">{vehicle.Title}</h1>
             <Image
                 src={vehicle.Image.url}
-                alt={vehicle.Image.alt}
+                alt={vehicle.Image.alternativeText ? vehicle.Image.alternativeText: vehicle.Title}
                 width={vehicle.Image.width}
                 height={vehicle.Image.height}
                 className="w-full h-auto mb-4"

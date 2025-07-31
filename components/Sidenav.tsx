@@ -1,9 +1,10 @@
 import React from 'react';
-import { vehicles } from '../data/vehicles';
+import { vehicles } from '../data/r_vehicles';
 import Link from 'next/link';
 
 const SideNav: React.FC = () => {
-
+    const url = process.env.NEXT_PUBLIC_API_URL;
+    console.log(url);
     return(
 
         <ul className='space-y-1 pt-4 pb-4'>
