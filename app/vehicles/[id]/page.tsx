@@ -2,8 +2,9 @@
 import Image from 'next/image';
 import { vehicles } from '../../../data/r_vehicles';
 
-const VehiclePage = ({ params } : { params: any }) => {
-    const vehicle = vehicles.find(v => v.id === parseInt(params.id));
+const VehiclePage = async ({ params } : { params: any }) => {
+    const vehicleID = await params.id;
+    const vehicle = vehicles.find(v => v.id === parseInt(vehicleID));
 
     if (!vehicle) {
         return <div>Vehicle not found</div>;
