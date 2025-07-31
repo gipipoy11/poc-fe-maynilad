@@ -1,14 +1,30 @@
 // app/vehicles/[id]/page.js
 import Image from 'next/image';
 import { vehicles } from '../../../data/r_vehicles';
+import { notFound } from 'next/navigation';
 
-const VehiclePage = async ({ params }: { params: { id: string } }) => {
-    const vehicleID = params.id;
-    const vehicle = vehicles.find(v => v.id === parseInt(vehicleID));
+interface Vehicle {
+    id: number;
+    Title: string;
+    Description: string;
+    Url: string;
+    Image: {
+        url: string;
+        alternativeText?: string | null;
+        width: number;
+        height: number;
+    };
+}
 
-    if (!vehicle) {
-        return <div>Vehicle not found</div>;
-    }
+interface PageProps {
+    params: { id: string };
+}
+
+const VehiclePage = async ({ params }: PageProps) => {
+    const id = parseInt(params.id);
+    const vehicle = vehicles.find((v: Vehicle) => v.id === id);
+
+    if (!vehicle) return notFound();
 
     return (
         <div className='flex flex-col items-left max-w-2xl mx-auto p-4'>

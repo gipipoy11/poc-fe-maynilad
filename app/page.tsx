@@ -1,4 +1,3 @@
-// pages/index.js
 const Home = () => {
     return (
         <div>
