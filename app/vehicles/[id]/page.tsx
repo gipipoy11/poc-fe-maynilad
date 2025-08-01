@@ -1,33 +1,22 @@
+'use client';
 // app/vehicles/[id]/page.js
 import Image from 'next/image';
-import { vehicles } from '../../../data/r_vehicles';
 import { notFound } from 'next/navigation';
-
-interface Vehicle {
-    id: number;
-    documentId: string;
-    Title: string;
-    Description: string;
-    Url: string;
-    Image: {
-        url: string;
-        alternativeText?: string | null;
-        width: number;
-        height: number;
-    };
-}
-
-
+import { useVehicles } from '@/app/context/VehicleContext';
+import { Vehicle } from '@/app/interface/vehicle.interface';
 
 interface PageProps {
     params: { id: string, documentId: string };
 }
 
-const VehiclePage = async ({ params }: PageProps) => {
+const VehiclePage = ({ params }: PageProps) => {
     const id = params.id;
-    const vehicle = vehicles.find((v: Vehicle) => v.documentId === id);
+    const { vehicles, loading } = useVehicles();
 
-    // GEN please call api http://localhost:1337/api/pages/{{documentId HERE}}?populate=Image
+    // Find the vehicle by ID
+    const vehicle = (vehicles as Vehicle[]).find(v => v.id === Number(id));
+
+    if (loading) return <div>Loading...</div>;
     if (!vehicle) return notFound();
 
     return (

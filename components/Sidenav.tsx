@@ -4,25 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useVehicles } from '@/app/context/VehicleContext';
+import { Vehicle } from '@/app/interface/vehicle.interface';
 
-type Vehicle = {
-    id: number;
-    Title: string;
-    documentId: string;
-    Image: {
-        formats: {
-            thumbnail: {
-                url: string;
-                name: string;
-                hash: string;
-                ext: string;
-                width: number;
-                height: number;
-            };
-        };
-        alternativeText?: string;
-    };
-};
 
 const SideNav: React.FC = () => {
     const { vehicles, loading, error } = useVehicles();
