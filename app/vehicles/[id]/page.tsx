@@ -24,12 +24,10 @@ interface PageProps {
 }
 
 const VehiclePage = async ({ params }: PageProps) => {
-    const id = params.documentId;
+    const id = params.id;
     const vehicle = vehicles.find((v: Vehicle) => v.documentId === id);
 
     // GEN please call api http://localhost:1337/api/pages/{{documentId HERE}}?populate=Image
-    console.log('here: ', vehicle);
-
     if (!vehicle) return notFound();
 
     return (
