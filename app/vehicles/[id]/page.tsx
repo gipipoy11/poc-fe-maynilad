@@ -1,20 +1,17 @@
 'use client';
-// app/vehicles/[id]/page.js
+
+import React from 'react';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { useVehicles } from '@/app/context/VehicleContext';
 import { Vehicle } from '@/app/interface/vehicle.interface';
 
-interface PageProps {
-    params: { id: string, documentId: string };
-}
-
-const VehiclePage = ({ params }: PageProps) => {
-    const id = params.id;
+const VehiclePage = () => {
+    const { id } = useParams() as { id: string };
     const { vehicles, loading } = useVehicles();
 
     // Find the vehicle by ID
-    const vehicle = (vehicles as Vehicle[]).find(v => v.id === Number(id));
+    const vehicle = (vehicles as Vehicle[]).find(v => v.documentId === id);
 
     if (loading) return <div>Loading...</div>;
     if (!vehicle) return notFound();

@@ -2,17 +2,24 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { vehiclesJson } from '../../data/r_vehicles';
+import { PropsWithChildren } from 'react';
+import { Vehicle } from '../interface/vehicle.interface';
 
-const VehicleContext = createContext({
+interface VehicleContextType {
+    vehicles: Vehicle[];
+    loading: boolean;
+    error: unknown;
+}
+
+const VehicleContext = createContext<VehicleContextType>({
     vehicles: [],
     loading: true,
-    error: null as unknown
+    error: null
 });
 
-import { PropsWithChildren } from 'react';
-
 export const VehicleProvider = ({ children }: PropsWithChildren<object>) => {
-    const [vehicles, setVehicles] = useState([]);
+    const [vehicles, setVehicles] = useState<Vehicle[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<unknown>(null);
 
@@ -28,6 +35,8 @@ export const VehicleProvider = ({ children }: PropsWithChildren<object>) => {
             try {
                 const response = await axios.get(url);
                 setVehicles(response.data.data);
+
+                //setVehicles(vehiclesJson); //for testing purposes
             } catch (err) {
                 setError(err as Error);
             } finally {

@@ -1,4 +1,4 @@
-export const vehicles = [
+export const vehiclesJson = [
     {
         id: 7,
         documentId: "fdchhoj7v77ejih6fs4w0v1j",
