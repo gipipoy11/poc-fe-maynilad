@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 
 interface Vehicle {
     id: number;
+    documentId: string;
     Title: string;
     Description: string;
     Url: string;
@@ -19,12 +20,15 @@ interface Vehicle {
 
 
 interface PageProps {
-    params: { id: string };
+    params: { id: string, documentId: string };
 }
 
 const VehiclePage = async ({ params }: PageProps) => {
-    const id = parseInt(params.id);
-    const vehicle = vehicles.find((v: Vehicle) => v.id === id);
+    const id = params.documentId;
+    const vehicle = vehicles.find((v: Vehicle) => v.documentId === id);
+
+    // GEN please call api http://localhost:1337/api/pages/{{documentId HERE}}?populate=Image
+    console.log('here: ', vehicle);
 
     if (!vehicle) return notFound();
 

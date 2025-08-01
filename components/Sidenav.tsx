@@ -8,6 +8,7 @@ import { useVehicles } from '@/app/context/VehicleContext';
 type Vehicle = {
     id: number;
     Title: string;
+    documentId: string;
     Image: {
         formats: {
             thumbnail: {
@@ -35,7 +36,7 @@ const SideNav: React.FC = () => {
             {vehicles.map((vehicle: Vehicle) => (
             <li key={vehicle.id} className="mb-2">
                 <Link
-                href={`/vehicles/${vehicle.id}`}
+                href={`/vehicles/${vehicle.documentId}`}
                 className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                 >
                 <Image
